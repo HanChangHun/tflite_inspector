@@ -2,7 +2,7 @@
 
 # namespace: tflite
 
-import flatbuffers
+import my_flatbuffers as flatbuffers
 
 class SequenceRNNOptions(object):
     __slots__ = ['_tab']

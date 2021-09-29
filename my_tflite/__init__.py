@@ -2,7 +2,9 @@
 
 __version__ = '2.4.0'
 
-
+import sys
+sys.path.append("../")
+import my_flatbuffers as flatbuffers
 
 ########################## BELOW ARE AUTO-GENERATED ##########################
 from .AbsOptions import *

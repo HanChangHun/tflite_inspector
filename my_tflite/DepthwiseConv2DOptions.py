@@ -2,7 +2,7 @@
 
 # namespace: tflite
 
-import flatbuffers
+import my_flatbuffers as flatbuffers
 
 class DepthwiseConv2DOptions(object):
     __slots__ = ['_tab']

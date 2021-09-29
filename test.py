@@ -46,4 +46,5 @@ if __name__ == "__main__":
     fc1_model = get_model(fc1_path)
     fc1_tpu_model = get_model(fc1_tpu_path)
 
-    fc1_model.Version()
+    print(fc1_model.Version())
+    

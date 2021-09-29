@@ -2,7 +2,7 @@
 
 # namespace: tflite
 
-import flatbuffers
+import my_flatbuffers as flatbuffers
 
 class ReverseSequenceOptions(object):
     __slots__ = ['_tab']
