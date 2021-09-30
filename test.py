@@ -27,11 +27,11 @@ def get_metadata(path):
 def print_buf(buf):
     hex_str = buf.hex()
     for i in range(0, len(hex_str), 16):
-        cur_hex = hex_str[i : i + 16]
+        cur_hex = hex_str[i: i + 16]
         n = 2
         hex_list = []
         for i in range(0, len(cur_hex), n):
-            hex_list.append(cur_hex[i : i + n])
+            hex_list.append(cur_hex[i: i + n])
         front_2 = "".join(hex_list[:2])
         front_4 = "".join(hex_list[2:4])
         backward_2 = "".join(hex_list[4:6])
@@ -40,11 +40,25 @@ def print_buf(buf):
 
 
 if __name__ == "__main__":
-    fc1_path = Path("../HMSL-TPU-Desktop/3_tflite_analyze/models/temp/temp.tflite")
-    fc1_tpu_path = Path("../HMSL-TPU-Desktop/3_tflite_analyze/models/temp/temp_edgetpu.tflite")
-
+    fc1_path = Path("models/temp.tflite")
     fc1_model = get_model(fc1_path)
-    fc1_tpu_model = get_model(fc1_tpu_path)
 
-    print(fc1_model.Version())
-    
+    # fc1_tpu_path = Path("models/temp_edgetpu.tflite")
+    # fc1_tpu_model = get_model(fc1_tpu_path)
+
+    fc1_model_Version = fc1_model.Version()
+    fc1_model_OperatorCodes = fc1_model.OperatorCodes(0)
+    fc1_model_OperatorCodesLength = fc1_model.OperatorCodesLength()
+    fc1_model_Description = fc1_model.Description()
+    fc1_model_Subgraphs = fc1_model.Subgraphs(0)
+    fc1_model_Subgraphs = fc1_model.Subgraphs(1)
+    fc1_model_Subgraphs = fc1_model.Subgraphs(2)
+    fc1_model_SubgraphsLength = fc1_model.SubgraphsLength()
+    fc1_model_Buffers = fc1_model.Buffers(0)
+    fc1_model_Buffers = fc1_model.Buffers(1)
+    fc1_model_Buffers = fc1_model.Buffers(2)
+    fc1_model_BuffersLength = fc1_model.BuffersLength()
+    fc1_model_Metadata = fc1_model.Metadata(0)
+    fc1_model_MetadataLength = fc1_model.MetadataLength()
+    fc1_model_SignatureDefs = fc1_model.SignatureDefs(0)
+    fc1_model_SignatureDefsLength = fc1_model.SignatureDefsLength()

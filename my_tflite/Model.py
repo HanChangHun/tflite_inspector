@@ -4,41 +4,63 @@
 
 import my_flatbuffers as flatbuffers
 
+
+def PrintDecorator(func):
+    def inner(*args, **kwargs):
+        print(f"\nModel.{func.__name__} is called")
+        result = func(*args, **kwargs)
+        return result
+    return inner
+
+
 class Model(object):
     __slots__ = ['_tab']
 
     @classmethod
+    @PrintDecorator
     def GetRootAsModel(cls, buf, offset):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
         x = Model()
+        print(f"table's address : {n + offset}")
         x.Init(buf, n + offset)
         return x
 
     # Model
+    @PrintDecorator
     def Init(self, buf, pos):
+        print(f"pos: {pos}")
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # Model
+    @PrintDecorator
     def Version(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Uint32Flags, o + self._tab.Pos)
+            print("-" * 50)
+            result = self._tab.Get(flatbuffers.number_types.Uint32Flags,
+                                   o + self._tab.Pos)
+            print("-" * 50)
+            return result
         return 0
 
     # Model
+    @PrintDecorator
     def OperatorCodes(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
+            print("-" * 50)
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
             x = self._tab.Indirect(x)
             from .OperatorCode import OperatorCode
             obj = OperatorCode()
             obj.Init(self._tab.Bytes, x)
+            print("-" * 50)
             return obj
         return None
 
     # Model
+    @PrintDecorator
     def OperatorCodesLength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
@@ -46,6 +68,7 @@ class Model(object):
         return 0
 
     # Model
+    @PrintDecorator
     def Subgraphs(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
@@ -59,6 +82,7 @@ class Model(object):
         return None
 
     # Model
+    @PrintDecorator
     def SubgraphsLength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
@@ -66,33 +90,44 @@ class Model(object):
         return 0
 
     # Model
+    @PrintDecorator
     def Description(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
-            return self._tab.String(o + self._tab.Pos)
+            print("-" * 50)
+            result = self._tab.String(o + self._tab.Pos)
+            print("-" * 50)
+            return result
         return None
 
     # Model
+    @PrintDecorator
     def Buffers(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
         if o != 0:
+            print("-" * 50)
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
             x = self._tab.Indirect(x)
             from .Buffer import Buffer
             obj = Buffer()
             obj.Init(self._tab.Bytes, x)
+            print("-" * 50)
             return obj
         return None
 
     # Model
+    @PrintDecorator
     def BuffersLength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
         if o != 0:
-            return self._tab.VectorLen(o)
+            result = self._tab.VectorLen(o)
+            print("-" * 50)
+            return result
         return 0
 
     # Model
+    @PrintDecorator
     def MetadataBuffer(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
@@ -101,6 +136,7 @@ class Model(object):
         return 0
 
     # Model
+    @PrintDecorator
     def MetadataBufferAsNumpy(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
@@ -108,6 +144,7 @@ class Model(object):
         return 0
 
     # Model
+    @PrintDecorator
     def MetadataBufferLength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
@@ -115,6 +152,7 @@ class Model(object):
         return 0
 
     # Model
+    @PrintDecorator
     def Metadata(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
@@ -128,6 +166,7 @@ class Model(object):
         return None
 
     # Model
+    @PrintDecorator
     def MetadataLength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
@@ -135,6 +174,7 @@ class Model(object):
         return 0
 
     # Model
+    @PrintDecorator
     def SignatureDefs(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
         if o != 0:
@@ -148,6 +188,7 @@ class Model(object):
         return None
 
     # Model
+    @PrintDecorator
     def SignatureDefsLength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
         if o != 0:
